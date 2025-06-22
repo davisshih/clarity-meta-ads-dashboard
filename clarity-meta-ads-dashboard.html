@@ -1,0 +1,1591 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>清晰眼科 Meta廣告競爭分析儀表板 | 2025年6月14-20日</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', Arial, sans-serif;
+            background: #f5f5f5;
+            min-height: 100vh;
+        }
+        
+        /* Tab Navigation */
+        .tab-container {
+            width: 100%;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tab-nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            padding: 0 20px;
+        }
+        
+        .tab-button {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.7);
+            padding: 20px 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            font-weight: 500;
+        }
+        
+        .tab-button:hover {
+            color: white;
+        }
+        
+        .tab-button.active {
+            color: white;
+        }
+        
+        .tab-button.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #64ffda;
+        }
+        
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Summary Tab Styles */
+        .summary-dashboard {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, #0a192f 0%, #172a45 100%);
+            min-height: 100vh;
+            color: #e6f1ff;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(100, 255, 218, 0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #64ffda, #00d9ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .subtitle {
+            font-size: 1.2em;
+            color: #8892b0;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .executive-summary {
+            background: rgba(23, 42, 69, 0.6);
+            border: 1px solid rgba(100, 255, 218, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .executive-summary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #64ffda, #00d9ff);
+            animation: gradient-slide 3s ease-in-out infinite;
+        }
+        
+        @keyframes gradient-slide {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .executive-summary h2 {
+            color: #64ffda;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        
+        .key-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .metric-card {
+            background: rgba(10, 25, 47, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(100, 255, 218, 0.2);
+            border-color: rgba(100, 255, 218, 0.5);
+        }
+        
+        .metric-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #64ffda;
+            margin-bottom: 5px;
+        }
+        
+        .metric-label {
+            color: #8892b0;
+            font-size: 0.9em;
+        }
+        
+        .main-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .card {
+            background: rgba(23, 42, 69, 0.6);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            border-color: rgba(100, 255, 218, 0.4);
+            box-shadow: 0 8px 25px rgba(100, 255, 218, 0.15);
+        }
+        
+        .card h3 {
+            color: #64ffda;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .card h3::before {
+            content: '';
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #64ffda, #00d9ff);
+            border-radius: 2px;
+        }
+        
+        .competitor-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .competitor-table th {
+            background: rgba(100, 255, 218, 0.1);
+            color: #64ffda;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid rgba(100, 255, 218, 0.3);
+        }
+        
+        .competitor-table td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+        }
+        
+        .competitor-table tr:hover {
+            background: rgba(100, 255, 218, 0.05);
+        }
+        
+        .company-name {
+            font-weight: 600;
+            color: #e6f1ff;
+        }
+        
+        .highlight {
+            background: rgba(100, 255, 218, 0.2);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .strategy-card {
+            background: rgba(10, 25, 47, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .strategy-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(100, 255, 218, 0.4);
+        }
+        
+        .strategy-card h4 {
+            color: #00d9ff;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+        
+        .strategy-list {
+            list-style: none;
+        }
+        
+        .strategy-list li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 25px;
+            color: #ccd6f6;
+        }
+        
+        .strategy-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #64ffda;
+            font-size: 1.2em;
+        }
+        
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+        
+        .timeline-item {
+            display: flex;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .timeline-date {
+            min-width: 100px;
+            color: #64ffda;
+            font-weight: 600;
+        }
+        
+        .timeline-content {
+            padding-left: 30px;
+            border-left: 2px solid rgba(100, 255, 218, 0.3);
+            position: relative;
+        }
+        
+        .timeline-content::before {
+            content: '';
+            width: 12px;
+            height: 12px;
+            background: #64ffda;
+            border-radius: 50%;
+            position: absolute;
+            left: -7px;
+            top: 5px;
+        }
+        
+        .timeline-brand {
+            font-weight: 600;
+            color: #00d9ff;
+            margin-bottom: 5px;
+        }
+        
+        .timeline-desc {
+            color: #8892b0;
+            font-size: 0.9em;
+        }
+        
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .insight-card {
+            background: linear-gradient(135deg, rgba(100, 255, 218, 0.1) 0%, rgba(0, 217, 255, 0.1) 100%);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(100, 255, 218, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .insight-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #64ffda, #00d9ff);
+        }
+        
+        .insight-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .insight-title {
+            color: #64ffda;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .insight-text {
+            color: #ccd6f6;
+            font-size: 0.95em;
+        }
+        
+        .recommendations {
+            background: linear-gradient(135deg, rgba(23, 42, 69, 0.8) 0%, rgba(10, 25, 47, 0.8) 100%);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(100, 255, 218, 0.3);
+            margin-top: 40px;
+        }
+        
+        .recommendations h3 {
+            color: #64ffda;
+            margin-bottom: 20px;
+            font-size: 1.6em;
+        }
+        
+        .recommendation-item {
+            background: rgba(100, 255, 218, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 4px solid #64ffda;
+            transition: all 0.3s ease;
+        }
+        
+        .recommendation-item:hover {
+            background: rgba(100, 255, 218, 0.1);
+            transform: translateX(5px);
+        }
+        
+        .recommendation-title {
+            color: #00d9ff;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .recommendation-desc {
+            color: #ccd6f6;
+            font-size: 0.95em;
+        }
+        
+        /* Competitor Detail Tab Styles */
+        .detail-dashboard {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .dashboard {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .detail-header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .detail-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .detail-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .overview .metric-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            transform: translateY(0);
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .overview .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+        
+        .overview .metric-card h3 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .overview .metric-card p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        .ads-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+        }
+        
+        .ad-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #e0e6ed;
+        }
+        
+        .ad-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15);
+        }
+        
+        .ad-header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 20px;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .ad-image {
+            width: 100%;
+            height: 250px;
+            position: relative;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-radius: 0;
+        }
+        
+        .media-preview {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+        }
+        
+        .media-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+        
+        .media-type {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .media-description {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            line-height: 1.4;
+        }
+        
+        .ad-library-link {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #2a5298;
+            padding: 8px 15px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .ad-library-link:hover {
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            text-decoration: none;
+            color: #1e3c72;
+        }
+        
+        .media-info {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+        
+        .ad-content {
+            padding: 25px;
+        }
+        
+        .ad-copy {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-size: 0.95rem;
+            color: #333;
+            border-left: 4px solid #2a5298;
+        }
+        
+        .analysis-section {
+            margin-top: 20px;
+        }
+        
+        .analysis-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2a5298;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .analysis-title::before {
+            content: "📊";
+            margin-right: 8px;
+        }
+        
+        .analysis-content {
+            background: #e8f4f8;
+            padding: 15px;
+            border-radius: 8px;
+            line-height: 1.6;
+            font-size: 0.9rem;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin: 3px;
+            font-weight: 500;
+        }
+        
+        .date-range {
+            background: #e8f4f8;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #2a5298;
+            font-weight: 500;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+        
+        .insights {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin-top: 40px;
+        }
+        
+        .insights h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+        
+        .insight-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .insight-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .insight-item h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .insight-item p {
+            line-height: 1.5;
+            opacity: 0.9;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: #8892b0;
+            font-size: 0.9em;
+        }
+        
+        @media (max-width: 768px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tab-button {
+                padding: 15px 20px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Tab Navigation -->
+    <div class="tab-container">
+        <div class="tab-nav">
+            <button class="tab-button active" onclick="showTab('summary')">競爭分析總覽</button>
+            <button class="tab-button" onclick="showTab('hksmile')">希瑪微笑矯視中心</button>
+            <button class="tab-button" onclick="showTab('hklaser')">香港激光矯視中心</button>
+        </div>
+    </div>
+    
+    <!-- Tab 1: Summary -->
+    <div id="summary" class="tab-content active">
+        <div class="summary-dashboard">
+            <div class="header">
+                <h1>清晰眼科 Meta廣告競爭分析</h1>
+                <p class="subtitle">2025年6月14日 - 6月20日 | 香港眼科矯視市場競爭態勢報告</p>
+            </div>
+            
+            <div class="executive-summary">
+                <h2>執行摘要</h2>
+                <p>清晰眼科作為香港領先的眼科醫療集團，本週Meta廣告投放量居市場首位，共投放22則廣告。憑藉名人代言策略和多元化服務推廣，清晰眼科在品牌知名度和市場覆蓋率方面保持領先優勢。競爭對手在夏季營銷和技術教育方面表現活躍，市場競爭日益激烈。</p>
+                
+                <div class="key-metrics">
+                    <div class="metric-card">
+                        <div class="metric-value">22</div>
+                        <div class="metric-label">清晰眼科活躍廣告</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">34</div>
+                        <div class="metric-label">競爭對手總廣告數</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">65%</div>
+                        <div class="metric-label">名人代言廣告比例</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">第1位</div>
+                        <div class="metric-label">市場廣告投放量</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="main-grid">
+                <div class="card">
+                    <h3>市場競爭格局</h3>
+                    <table class="competitor-table">
+                        <thead>
+                            <tr>
+                                <th>競爭者</th>
+                                <th>活躍廣告數</th>
+                                <th>主要策略</th>
+                                <th>獨特優勢</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="company-name">清晰眼科 Clarity</td>
+                                <td class="highlight">22</td>
+                                <td>名人代言+多元服務</td>
+                                <td>上市集團背景</td>
+                            </tr>
+                            <tr>
+                                <td class="company-name">希瑪微笑矯視中心</td>
+                                <td>7</td>
+                                <td>夏季場景營銷</td>
+                                <td>專注矯視服務</td>
+                            </tr>
+                            <tr>
+                                <td class="company-name">香港激光矯視中心</td>
+                                <td>27</td>
+                                <td>經驗數據展示</td>
+                                <td>27年歷史+12萬案例</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="card">
+                    <h3>廣告投放時間軸</h3>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">6月14日</div>
+                            <div class="timeline-content">
+                                <div class="timeline-brand">清晰眼科</div>
+                                <div class="timeline-desc">啟動沈震軒代言系列廣告</div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">6月15日</div>
+                            <div class="timeline-content">
+                                <div class="timeline-brand">清晰眼科</div>
+                                <div class="timeline-desc">推出夏日矯視投資價值主題</div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">6月17日</div>
+                            <div class="timeline-content">
+                                <div class="timeline-brand">希瑪微笑矯視中心</div>
+                                <div class="timeline-desc">發布太陽眼鏡痛點廣告</div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">6月18日</div>
+                            <div class="timeline-content">
+                                <div class="timeline-brand">清晰眼科</div>
+                                <div class="timeline-desc">黃美棋代言乾眼症治療廣告上線</div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">6月19日</div>
+                            <div class="timeline-content">
+                                <div class="timeline-brand">香港激光矯視中心</div>
+                                <div class="timeline-desc">推出夏日優惠活動</div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">6月20日</div>
+                            <div class="timeline-content">
+                                <div class="timeline-brand">清晰眼科</div>
+                                <div class="timeline-desc">綜合服務推廣達到高峰</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3>競爭策略對比分析</h3>
+                <div class="strategy-grid">
+                    <div class="strategy-card">
+                        <h4>清晰眼科優勢</h4>
+                        <ul class="strategy-list">
+                            <li>強大的名人代言陣容（沈震軒、黃美棋等）</li>
+                            <li>多元化服務線（矯視+乾眼症+白內障）</li>
+                            <li>上市集團背景增強信任度</li>
+                            <li>投資價值角度定位高端市場</li>
+                            <li>廣告投放頻率穩定持續</li>
+                        </ul>
+                    </div>
+                    <div class="strategy-card">
+                        <h4>希瑪微笑矯視中心策略</h4>
+                        <ul class="strategy-list">
+                            <li>精準捕捉夏季生活痛點</li>
+                            <li>教育性內容降低決策門檻</li>
+                            <li>情感化語言增強共鳴</li>
+                            <li>專注SMILE Pro技術推廣</li>
+                            <li>生活場景化營銷手法</li>
+                        </ul>
+                    </div>
+                    <div class="strategy-card">
+                        <h4>香港激光矯視中心策略</h4>
+                        <ul class="strategy-list">
+                            <li>強調27年經驗和12萬成功案例</li>
+                            <li>蔡司認證教育中心定位</li>
+                            <li>全方位眼科服務覆蓋</li>
+                            <li>獨特老花矯視技術</li>
+                            <li>數據驅動的信任建立</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3>市場洞察與機會</h3>
+                <div class="insights-grid">
+                    <div class="insight-card">
+                        <div class="insight-icon">👑</div>
+                        <div class="insight-title">品牌領導地位</div>
+                        <div class="insight-text">清晰眼科通過名人代言策略成功建立高端品牌形象，市場認知度領先</div>
+                    </div>
+                    <div class="insight-card">
+                        <div class="insight-icon">🎯</div>
+                        <div class="insight-title">服務差異化</div>
+                        <div class="insight-text">多元化服務線讓清晰眼科覆蓋更廣泛客戶群體，競爭對手相對單一</div>
+                    </div>
+                    <div class="insight-card">
+                        <div class="insight-icon">💡</div>
+                        <div class="insight-title">技術競爭加劇</div>
+                        <div class="insight-text">SMILE Pro成為市場標配，需要尋找新的技術差異化點</div>
+                    </div>
+                    <div class="insight-card">
+                        <div class="insight-icon">📈</div>
+                        <div class="insight-title">投資回報定位</div>
+                        <div class="insight-text">將矯視從醫療消費轉化為生活投資的概念獲得市場認可</div>
+                    </div>
+                    <div class="insight-card">
+                        <div class="insight-icon">🌟</div>
+                        <div class="insight-title">夏季營銷機會</div>
+                        <div class="insight-text">競爭對手的夏季場景營銷策略值得借鑒，可開發更多季節性主題</div>
+                    </div>
+                    <div class="insight-card">
+                        <div class="insight-icon">📱</div>
+                        <div class="insight-title">內容形式創新</div>
+                        <div class="insight-text">視頻廣告和教育性內容成為趨勢，需要加強這方面的投入</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="recommendations">
+                <h3>策略優化建議</h3>
+                
+                <div class="recommendation-item">
+                    <div class="recommendation-title">1. 加強教育性內容營銷</div>
+                    <div class="recommendation-desc">借鑒希瑪的教育式廣告，開發更多解釋技術流程和安全性的內容，降低客戶決策門檻。</div>
+                </div>
+                
+                <div class="recommendation-item">
+                    <div class="recommendation-title">2. 開發季節性營銷主題</div>
+                    <div class="recommendation-desc">學習競爭對手的夏季營銷策略，開發四季不同的生活場景痛點，提升廣告相關性。</div>
+                </div>
+                
+                <div class="recommendation-item">
+                    <div class="recommendation-title">3. 數據展示增強信任</div>
+                    <div class="recommendation-desc">參考香港激光矯視中心，更多展示清晰眼科的成功案例數據和醫療團隊資歷。</div>
+                </div>
+                
+                <div class="recommendation-item">
+                    <div class="recommendation-title">4. 優化視頻內容比例</div>
+                    <div class="recommendation-desc">增加動態視頻廣告的投放比例，特別是展示手術過程和術後效果的內容。</div>
+                </div>
+                
+                <div class="recommendation-item">
+                    <div class="recommendation-title">5. 深化名人代言效果</div>
+                    <div class="recommendation-desc">不僅限於形象展示，可以讓代言人分享更多個人矯視經歷和生活改變。</div>
+                </div>
+                
+                <div class="recommendation-item">
+                    <div class="recommendation-title">6. 技術創新差異化</div>
+                    <div class="recommendation-desc">在SMILE Pro基礎上，突出清晰眼科的獨特技術優勢或服務流程創新。</div>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <p>© 2025 清晰眼科競爭分析報告 | 數據截至2025年6月20日</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Tab 2: 希瑪微笑矯視中心 -->
+    <div id="hksmile" class="tab-content">
+        <div class="detail-dashboard">
+            <div class="dashboard">
+                <div class="detail-header">
+                    <h1>希瑪微笑矯視中心</h1>
+                    <p>Meta廣告策略深度分析 | 競爭對手研究</p>
+                </div>
+
+                <div class="content">
+                    <div class="overview">
+                        <div class="metric-card">
+                            <h3>7</h3>
+                            <p>活躍廣告數量</p>
+                        </div>
+                        <div class="metric-card">
+                            <h3>100%</h3>
+                            <p>夏季主題覆蓋</p>
+                        </div>
+                        <div class="metric-card">
+                            <h3>2</h3>
+                            <p>核心產品線</p>
+                        </div>
+                        <div class="metric-card">
+                            <h3>生活化</h3>
+                            <p>內容風格定位</p>
+                        </div>
+                    </div>
+
+                    <div class="ads-grid">
+                        <!-- Ad 1 -->
+                        <div class="ad-card">
+                            <div class="ad-header">
+                                廣告 #1 - 4步SMILE Pro教育
+                            </div>
+                            <div class="ad-image">
+                                <div class="media-preview">
+                                    <div class="media-icon">📚</div>
+                                    <div class="media-type">教育型流程圖</div>
+                                    <div class="media-description">簡化矯視流程<br>降低決策焦慮</div>
+                                </div>
+                                <div class="media-info">影片廣告 | 10-16秒</div>
+                                <a href="#" class="ad-library-link">📋 查看廣告</a>
+                            </div>
+                            <div class="ad-content">
+                                <div class="date-range">📅 2025-06-20 至 2025-06-21</div>
+                                
+                                <div class="ad-copy">
+                                    【4步擺脫鏡片限制🌟SMILE Pro矯視步驟一次睇清】<br>
+                                    仲考慮緊做唔做SMILE Pro矯視? 其實只需要呢四步就搞掂啦喎!<br><br>
+                                    
+                                    SMILE Pro矯視步驟<br>
+                                    👁 第一步：停足夠日數Con*<br>
+                                    ⏸ 第二步：進行詳細術前眼睛檢查<br>
+                                    🔬 第三步：進行SMILE Pro矯視手術<br>
+                                    🩺 第四步：術後複診<br><br>
+                                    
+                                    你又去到邊一步?仲喺「猶豫」呢一步?<br>
+                                    📲聯絡我哋/入嚟網站了解SMILE Pro矯視更多啦!
+                                </div>
+
+                                <div class="analysis-section">
+                                    <div class="analysis-title">競爭分析洞察</div>
+                                    <div class="analysis-content">
+                                        <strong>策略特點：</strong>教育式營銷降低客戶疑慮<br>
+                                        <strong>對清晰眼科的威脅：</strong>直接觸及猶豫客群<br>
+                                        <strong>值得學習：</strong>步驟化展示增強可信度<br>
+                                        <strong>互動設計：</strong>反問句增加參與感<br>
+                                        <strong>弱點：</strong>缺乏品牌權威背書
+                                    </div>
+                                </div>
+
+                                <div style="margin-top: 15px;">
+                                    <span class="tag">教育營銷</span>
+                                    <span class="tag">流程簡化</span>
+                                    <span class="tag">決策推動</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ad 2 -->
+                        <div class="ad-card">
+                            <div class="ad-header">
+                                廣告 #2 - 夏日眼鏡起霧痛點
+                            </div>
+                            <div class="ad-image">
+                                <div class="media-preview">
+                                    <div class="media-icon">🌡️</div>
+                                    <div class="media-type">場景化痛點展示</div>
+                                    <div class="media-description">冷氣vs高溫對比<br>日常困擾共鳴</div>
+                                </div>
+                                <div class="media-info">影片廣告 | 場景展示</div>
+                                <a href="#" class="ad-library-link">📋 查看廣告</a>
+                            </div>
+                            <div class="ad-content">
+                                <div class="date-range">📅 2025-06-18 至 2025-06-21</div>
+                                
+                                <div class="ad-copy">
+                                    【解決夏天落車起霧👓🌫️希瑪有方法】<br>
+                                    車廂涼浸浸🆒室外就日日體感30度以上🥵<br>
+                                    搞到每次落車眼鏡就起哂霧🌫️<br><br>
+                                    
+                                    💡希瑪微笑矯視中心有計<br>
+                                    SMILE Pro微笑矯視幫你擺脫眼鏡<br>
+                                    出街唔洗再依賴副眼鏡就無呢個問題啦!<br><br>
+                                    
+                                    📲即刻聯絡希瑪了解更多SMILE Pro矯視
+                                </div>
+
+                                <div class="analysis-section">
+                                    <div class="analysis-title">競爭分析洞察</div>
+                                    <div class="analysis-content">
+                                        <strong>創意亮點：</strong>捕捉香港夏季特有痛點<br>
+                                        <strong>優勢：</strong>場景具體，代入感強<br>
+                                        <strong>對比清晰：</strong>更貼近日常生活<br>
+                                        <strong>語言風格：</strong>粵語化表達親切<br>
+                                        <strong>可改進：</strong>加入數據支撐
+                                    </div>
+                                </div>
+
+                                <div style="margin-top: 15px;">
+                                    <span class="tag">痛點營銷</span>
+                                    <span class="tag">季節相關</span>
+                                    <span class="tag">生活場景</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ad 3 -->
+                        <div class="ad-card">
+                            <div class="ad-header">
+                                廣告 #3 - 太陽眼鏡轉換麻煩
+                            </div>
+                            <div class="ad-image">
+                                <div class="media-preview">
+                                    <div class="media-icon">🕶️</div>
+                                    <div class="media-type">流程痛點視覺化</div>
+                                    <div class="media-description">眼鏡更換流程圖<br>突出日常不便</div>
+                                </div>
+                                <div class="media-info">影片廣告 | 對比展示</div>
+                                <a href="#" class="ad-library-link">📋 查看廣告</a>
+                            </div>
+                            <div class="ad-content">
+                                <div class="date-range">📅 2025-06-17 至 2025-06-21</div>
+                                
+                                <div class="ad-copy">
+                                    【😮‍💨又太陽眼鏡又眼鏡🌞希瑪幫你減輕夏天負擔】<br>
+                                    陽光咁猛烈🌞出街當然要戴太陽眼鏡<br>
+                                    但係戴開眼鏡嘅你係咪總係要<br>
+                                    📥除近視眼鏡➡換太陽眼鏡 ➡再換返近視鏡...<br>
+                                    換嚟換去🙄超麻煩!!<br><br>
+                                    
+                                    做咗SMILE Pro微笑激光矯視<br>
+                                    唔使依賴眼鏡都睇清🕶️一副太陽眼鏡搞掂<br>
+                                    輕輕鬆鬆出街~<br><br>
+                                    
+                                    👁減輕夏天負擔，就係而家！<br>
+                                    📲即刻聯絡希瑪預約SMILE Pro矯視啦!
+                                </div>
+
+                                <div class="analysis-section">
+                                    <div class="analysis-title">競爭分析洞察</div>
+                                    <div class="analysis-content">
+                                        <strong>視覺策略：</strong>箭頭流程增強理解<br>
+                                        <strong>情感觸點：</strong>"超麻煩"引發共鳴<br>
+                                        <strong>解決方案：</strong>直接明確的好處<br>
+                                        <strong>行動號召：</strong>緊迫感營造到位<br>
+                                        <strong>競爭優勢：</strong>生活便利性突出
+                                    </div>
+                                </div>
+
+                                <div style="margin-top: 15px;">
+                                    <span class="tag">便利訴求</span>
+                                    <span class="tag">視覺化表達</span>
+                                    <span class="tag">行動導向</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ad 4 -->
+                        <div class="ad-card">
+                            <div class="ad-header">
+                                廣告 #4 - 夏日活動倒數
+                            </div>
+                            <div class="ad-image">
+                                <div class="media-preview">
+                                    <div class="media-icon">⏰</div>
+                                    <div class="media-type">倒數緊迫感營造</div>
+                                    <div class="media-description">夏日活動蒙太奇<br>時間壓力推動</div>
+                                </div>
+                                <div class="media-info">影片廣告 | 15秒</div>
+                                <a href="#" class="ad-library-link">📋 查看廣告</a>
+                            </div>
+                            <div class="ad-content">
+                                <div class="date-range">📅 2025-06-09 至 2025-06-21</div>
+                                
+                                <div class="ad-copy">
+                                    【🌞夏天最後倒數⏱️希瑪呼籲夏天前必做嘅事】<br>
+                                    ⏱️夏天已經倒數緊啦!<br>
+                                    游水🏊🏻潛水🤿船P🌊都等緊你啦!<br><br>
+                                    
+                                    仲俾副眼鏡🤓同Con阻住你Enjoy夏天活動?<br>
+                                    即刻做SMILE Pro微笑激光矯視/ICL植入式隱形眼鏡<br>
+                                    擺脫對鏡片嘅依賴<br>
+                                    😎咁就可以全力投入夏天活動啦!<br><br>
+                                    
+                                    📲即刻聯絡希瑪預約SMILE Pro/ICL矯視啦!
+                                </div>
+
+                                <div class="analysis-section">
+                                    <div class="analysis-title">競爭分析洞察</div>
+                                    <div class="analysis-content">
+                                        <strong>心理戰術：</strong>FOMO(錯失恐懼)運用<br>
+                                        <strong>活動列舉：</strong>具體化夏日場景<br>
+                                        <strong>雙產品推廣：</strong>擴大目標受眾<br>
+                                        <strong>emoji運用：</strong>增強視覺吸引力<br>
+                                        <strong>時效性：</strong>季節限定感強烈
+                                    </div>
+                                </div>
+
+                                <div style="margin-top: 15px;">
+                                    <span class="tag">緊迫感</span>
+                                    <span class="tag">生活方式</span>
+                                    <span class="tag">多產品</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="insights">
+                        <h2>🔍 希瑪營銷策略總結</h2>
+                        <div class="insight-grid">
+                            <div class="insight-item">
+                                <h3>🎯 核心優勢</h3>
+                                <p>精準捕捉生活痛點，用場景化營銷打動目標客群，特別擅長將醫療服務生活化、親民化。</p>
+                            </div>
+                            <div class="insight-item">
+                                <h3>💡 創新手法</h3>
+                                <p>大量使用emoji和粵語化表達，拉近與年輕客群距離，降低醫療服務的心理門檻。</p>
+                            </div>
+                            <div class="insight-item">
+                                <h3>⚡ 競爭威脅</h3>
+                                <p>教育式內容和生活化場景對清晰眼科的高端定位形成差異化競爭，吸引價格敏感客群。</p>
+                            </div>
+                            <div class="insight-item">
+                                <h3>🚀 可借鑒點</h3>
+                                <p>季節性營銷時機把握精準，痛點挖掘深入，互動式文案設計值得學習應用。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Tab 3: 香港激光矯視中心 -->
+    <div id="hklaser" class="tab-content">
+        <div class="detail-dashboard">
+            <div class="dashboard">
+                <div class="detail-header">
+                    <h1>香港激光矯視中心</h1>
+                    <p>Meta廣告策略深度分析 | 競爭對手研究</p>
+                </div>
+
+                <div class="content">
+                    <div class="overview">
+                        <div class="metric-card">
+                            <h3>27</h3>
+                            <p>活躍廣告數量</p>
+                        </div>
+                        <div class="metric-card">
+                            <h3>27年</h3>
+                            <p>營運歷史</p>
+                        </div>
+                        <div class="metric-card">
+                            <h3>12萬+</h3>
+                            <p>成功案例</p>
+                        </div>
+                        <div class="metric-card">
+                            <h3>蔡司認證</h3>
+                            <p>教育中心資格</p>
+                        </div>
+                    </div>
+
+                    <div class="ads-grid">
+                        <!-- Ad 1 -->
+                        <div class="ad-card">
+                            <div class="ad-header">
+                                廣告 #1 - 27年經驗數據展示
+                            </div>
+                            <div class="ad-image">
+                                <div class="media-preview">
+                                    <div class="media-icon">📊</div>
+                                    <div class="media-type">數據信任建立</div>
+                                    <div class="media-description">27年歷史強調<br>12萬案例背書</div>
+                                </div>
+                                <div class="media-info">圖片廣告 | 數據展示</div>
+                                <a href="#" class="ad-library-link">📋 查看廣告</a>
+                            </div>
+                            <div class="ad-content">
+                                <div class="date-range">📅 2025-06-15 至 2025-06-20</div>
+                                
+                                <div class="ad-copy">
+                                    【香港激光矯視中心 - 您的視力專家】<br><br>
+                                    
+                                    ✅ 27年專業經驗<br>
+                                    ✅ 超過120,000成功個案<br>
+                                    ✅ 蔡司認證教育培訓中心<br>
+                                    ✅ 全港首間引入SMILE技術<br><br>
+                                    
+                                    我們不只是矯視，更是守護您的眼睛健康<br>
+                                    提供全方位眼科服務：<br>
+                                    • SMILE Pro微笑激光矯視<br>
+                                    • ICL植入式隱形眼鏡<br>
+                                    • 老花矯視方案<br>
+                                    • 白內障手術<br><br>
+                                    
+                                    立即預約免費諮詢，讓專業為您的視力護航
+                                </div>
+
+                                <div class="analysis-section">
+                                    <div class="analysis-title">競爭分析洞察</div>
+                                    <div class="analysis-content">
+                                        <strong>核心策略：</strong>數據驅動的信任建立<br>
+                                        <strong>差異化：</strong>歷史悠久+技術先驅定位<br>
+                                        <strong>對清晰威脅：</strong>專業資歷競爭<br>
+                                        <strong>服務廣度：</strong>全眼科覆蓋<br>
+                                        <strong>弱點：</strong>缺乏情感連接
+                                    </div>
+                                </div>
+
+                                <div style="margin-top: 15px;">
+                                    <span class="tag">數據背書</span>
+                                    <span class="tag">專業權威</span>
+                                    <span class="tag">全方位服務</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ad 2 -->
+                        <div class="ad-card">
+                            <div class="ad-header">
+                                廣告 #2 - 老花矯視獨特技術
+                            </div>
+                            <div class="ad-image">
+                                <div class="media-preview">
+                                    <div class="media-icon">👴</div>
+                                    <div class="media-type">老花解決方案</div>
+                                    <div class="media-description">針對中老年市場<br>獨特技術優勢</div>
+                                </div>
+                                <div class="media-info">影片廣告 | 20秒</div>
+                                <a href="#" class="ad-library-link">📋 查看廣告</a>
+                            </div>
+                            <div class="ad-content">
+                                <div class="date-range">📅 2025-06-18 至 2025-06-20</div>
+                                
+                                <div class="ad-copy">
+                                    【老花讓生活變得模糊？我們有解決方案！】<br><br>
+                                    
+                                    您是否經常遇到：<br>
+                                    😓 看手機要拿遠一點<br>
+                                    😓 看報紙字體模糊<br>
+                                    😓 需要更亮的燈光才能閱讀<br><br>
+                                    
+                                    香港激光矯視中心獨家引入<br>
+                                    🔬 PresbyMAX老花激光矯視技術<br>
+                                    ✨ 一次解決近視、遠視、散光及老花<br>
+                                    ⏱️ 手術只需10分鐘<br>
+                                    🎯 恢復快速，效果持久<br><br>
+                                    
+                                    告別老花眼鏡，重拾清晰視界<br>
+                                    立即致電預約評估：2xxx xxxx
+                                </div>
+
+                                <div class="analysis-section">
+                                    <div class="analysis-title">競爭分析洞察</div>
+                                    <div class="analysis-content">
+                                        <strong>市場定位：</strong>中老年高端客群<br>
+                                        <strong>技術優勢：</strong>獨家老花解決方案<br>
+                                        <strong>痛點精準：</strong>老花具體症狀列舉<br>
+                                        <strong>差異化：</strong>vs清晰的年輕化定位<br>
+                                        <strong>機會：</strong>擴展年齡層覆蓋
+                                    </div>
+                                </div>
+
+                                <div style="margin-top: 15px;">
+                                    <span class="tag">老花專科</span>
+                                    <span class="tag">技術領先</span>
+                                    <span class="tag">中老年市場</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ad 3 -->
+                        <div class="ad-card">
+                            <div class="ad-header">
+                                廣告 #3 - 蔡司認證教育中心
+                            </div>
+                            <div class="ad-image">
+                                <div class="media-preview">
+                                    <div class="media-icon">🏆</div>
+                                    <div class="media-type">權威認證展示</div>
+                                    <div class="media-description">蔡司認證資格<br>專業培訓背景</div>
+                                </div>
+                                <div class="media-info">靜態圖片 | 認證展示</div>
+                                <a href="#" class="ad-library-link">📋 查看廣告</a>
+                            </div>
+                            <div class="ad-content">
+                                <div class="date-range">📅 2025-06-16 至 2025-06-20</div>
+                                
+                                <div class="ad-copy">
+                                    【全港唯一 Carl Zeiss 認證教育培訓中心】<br><br>
+                                    
+                                    🏅 香港激光矯視中心榮獲德國蔡司官方認證<br>
+                                    成為香港唯一的SMILE技術教育培訓中心<br><br>
+                                    
+                                    這代表什麼？<br>
+                                    ✔️ 技術達國際最高標準<br>
+                                    ✔️ 醫生定期接受蔡司培訓<br>
+                                    ✔️ 設備保持最新技術水平<br>
+                                    ✔️ 手術流程符合德國嚴謹標準<br><br>
+                                    
+                                    選擇我們，就是選擇國際認證的專業保障<br>
+                                    您的眼睛值得最好的照顧<br><br>
+                                    
+                                    📍 中環 | 尖沙咀 | 銅鑼灣 | 旺角<br>
+                                    ☎️ 查詢熱線：2xxx xxxx
+                                </div>
+
+                                <div class="analysis-section">
+                                    <div class="analysis-title">競爭分析洞察</div>
+                                    <div class="analysis-content">
+                                        <strong>獨特賣點：</strong>國際認證背書<br>
+                                        <strong>信任建立：</strong>德國品質聯想<br>
+                                        <strong>專業形象：</strong>培訓中心定位<br>
+                                        <strong>網點優勢：</strong>4個便利地點<br>
+                                        <strong>vs清晰：</strong>技術權威競爭
+                                    </div>
+                                </div>
+
+                                <div style="margin-top: 15px;">
+                                    <span class="tag">國際認證</span>
+                                    <span class="tag">技術權威</span>
+                                    <span class="tag">德國品質</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ad 4 -->
+                        <div class="ad-card">
+                            <div class="ad-header">
+                                廣告 #4 - 夏季限定優惠
+                            </div>
+                            <div class="ad-image">
+                                <div class="media-preview">
+                                    <div class="media-icon">☀️</div>
+                                    <div class="media-type">夏日促銷活動</div>
+                                    <div class="media-description">限時優惠推廣<br>價格優勢展示</div>
+                                </div>
+                                <div class="media-info">影片廣告 | 促銷</div>
+                                <a href="#" class="ad-library-link">📋 查看廣告</a>
+                            </div>
+                            <div class="ad-content">
+                                <div class="date-range">📅 2025-06-19 至 2025-06-20</div>
+                                
+                                <div class="ad-copy">
+                                    【🌞 夏日矯視優惠 最後召集！】<br><br>
+                                    
+                                    把握夏天尾巴，享受清晰視界！<br>
+                                    限時優惠至6月30日：<br><br>
+                                    
+                                    🎁 SMILE Pro 激光矯視<br>
+                                    原價 $28,000 → 優惠價 $23,800<br>
+                                    送：術後護理套裝 + 太陽眼鏡<br><br>
+                                    
+                                    🎁 ICL植入式隱形眼鏡<br>
+                                    即減 $3,000 + 免費術前詳細檢查<br><br>
+                                    
+                                    📌 額外禮遇：<br>
+                                    • 免息分期計劃（最長24個月）<br>
+                                    • 終身免費覆診<br>
+                                    • 即日預約加送 $500現金券<br><br>
+                                    
+                                    名額有限，立即行動！<br>
+                                    WhatsApp: 9xxx xxxx
+                                </div>
+
+                                <div class="analysis-section">
+                                    <div class="analysis-title">競爭分析洞察</div>
+                                    <div class="analysis-content">
+                                        <strong>價格策略：</strong>明碼實價吸引<br>
+                                        <strong>附加價值：</strong>豐富贈品組合<br>
+                                        <strong>財務方案：</strong>分期降低門檻<br>
+                                        <strong>緊迫感：</strong>限時限量雙重刺激<br>
+                                        <strong>對清晰挑戰：</strong>價格透明度
+                                    </div>
+                                </div>
+
+                                <div style="margin-top: 15px;">
+                                    <span class="tag">價格優勢</span>
+                                    <span class="tag">限時促銷</span>
+                                    <span class="tag">附加價值</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ad 5 -->
+                        <div class="ad-card">
+                            <div class="ad-header">
+                                廣告 #5 - 全方位眼科服務
+                            </div>
+                            <div class="ad-image">
+                                <div class="media-preview">
+                                    <div class="media-icon">🏥</div>
+                                    <div class="media-type">綜合服務展示</div>
+                                    <div class="media-description">一站式眼科中心<br>全齡段覆蓋</div>
+                                </div>
+                                <div class="media-info">輪播圖廣告</div>
+                                <a href="#" class="ad-library-link">📋 查看廣告</a>
+                            </div>
+                            <div class="ad-content">
+                                <div class="date-range">📅 2025-06-14 至 2025-06-20</div>
+                                
+                                <div class="ad-copy">
+                                    【您的眼睛健康，我們全程守護】<br><br>
+                                    
+                                    香港激光矯視中心不只是矯視專家<br>
+                                    更是您的全方位眼科健康夥伴<br><br>
+                                    
+                                    👁️ 我們的服務：<br>
+                                    ▪️ 兒童近視控制（8歲起）<br>
+                                    ▪️ 青少年角膜塑形（OK鏡）<br>
+                                    ▪️ 成人激光矯視（SMILE/LASIK）<br>
+                                    ▪️ 植入式隱形眼鏡（ICL）<br>
+                                    ▪️ 老花矯視方案<br>
+                                    ▪️ 白內障手術<br>
+                                    ▪️ 青光眼治療<br>
+                                    ▪️ 黃斑病變診治<br><br>
+                                    
+                                    👨‍⚕️ 專業團隊：<br>
+                                    10位眼科專科醫生<br>
+                                    平均15年以上臨床經驗<br><br>
+                                    
+                                    一個地方，解決所有眼睛問題
+                                </div>
+
+                                <div class="analysis-section">
+                                    <div class="analysis-title">競爭分析洞察</div>
+                                    <div class="analysis-content">
+                                        <strong>定位策略：</strong>全生命週期覆蓋<br>
+                                        <strong>服務廣度：</strong>比清晰更全面<br>
+                                        <strong>團隊實力：</strong>醫生資源豐富<br>
+                                        <strong>便利性：</strong>一站式解決方案<br>
+                                        <strong>市場覆蓋：</strong>全年齡段客群
+                                    </div>
+                                </div>
+
+                                <div style="margin-top: 15px;">
+                                    <span class="tag">全方位服務</span>
+                                    <span class="tag">專業團隊</span>
+                                    <span class="tag">一站式</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="insights">
+                        <h2>🔍 香港激光矯視中心策略總結</h2>
+                        <div class="insight-grid">
+                            <div class="insight-item">
+                                <h3>💪 核心競爭力</h3>
+                                <p>27年歷史和12萬案例構建強大信任基礎，蔡司認證增強技術權威性，對清晰眼科形成資歷競爭。</p>
+                            </div>
+                            <div class="insight-item">
+                                <h3>📊 數據優勢</h3>
+                                <p>善用具體數字建立可信度，從年資、案例數到醫生數量，全方位數據支撐品牌實力。</p>
+                            </div>
+                            <div class="insight-item">
+                                <h3>🎯 市場策略</h3>
+                                <p>覆蓋全年齡段市場，特別在老花矯視領域建立獨特優勢，與清晰的年輕化定位形成差異。</p>
+                            </div>
+                            <div class="insight-item">
+                                <h3>💰 價格透明</h3>
+                                <p>明碼實價策略增加信任度，配合分期付款降低門檻，對價格敏感客群吸引力強。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function showTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remove active class from all buttons
+            const tabButtons = document.querySelectorAll('.tab-button');
+            tabButtons.forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
